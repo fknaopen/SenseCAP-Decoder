@@ -1,4 +1,4 @@
-// for Wio Tracker 1110 Dev Board     2024/8/7
+// for Wio Tracker 1110 Dev Board     2025/7/10
 //
 // test data : 18000000000000000114328000008000800080008000002fffb103c4
 //{
@@ -43,6 +43,9 @@ function decodeUplink (input) {
 function normalizeMessage (messages) {
   var data = {air:{}, accelerometer:{}, etc:{}};
   
+  data.air.temperature = 0.0;
+  data.air.humidity = 0;
+  
   for (var i = 0; i < messages.length; i++) {
   var msg = messages[i];
     switch (msg.measurementId) {
@@ -80,6 +83,10 @@ function normalizeMessage (messages) {
         break;
     }
   }
+  var ta = data.air.temperature;
+  var rh = data.air.humidity;
+  data.air.wbgt = 0.754 * ta + 0.0382 * rh + 0.00264 * ta * rh - 3.965;
+  
   return { data }
 }
 
