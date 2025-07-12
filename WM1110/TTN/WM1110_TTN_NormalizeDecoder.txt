@@ -12,6 +12,7 @@
 //      "air": {
 //        "humidity": 50,
 //        "temperature": 27.6
+//        "wbgt": 24.6889
 //      }
 //    }
 //  }
